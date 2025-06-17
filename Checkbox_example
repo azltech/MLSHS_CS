@@ -1,0 +1,29 @@
+# Tkinter checkbox example
+# azltech june 2025
+
+import tkinter
+window = tkinter.Tk()
+window.title('My Window')
+window.geometry('100x100')
+ 
+l = tkinter.Label(window, bg='white', width=20, text='empty')
+l.pack()
+ 
+def print_selection():
+    if (var1.get() == 1) & (var2.get() == 0):
+        l.config(text='I love Python ')
+    elif (var1.get() == 0) & (var2.get() == 1):
+        l.config(text='I love C++')
+    elif (var1.get() == 0) & (var2.get() == 0):
+        l.config(text='I do not anything')
+    else:
+        l.config(text='I love both')
+ 
+var1 = tkinter.IntVar()
+var2 = tkinter.IntVar()
+c1 = tkinter.Checkbutton(window, text='Python',variable=var1, onvalue=1, offvalue=0, command=print_selection)
+c1.pack(padx=20)
+c2 = tkinter.Checkbutton(window, text='C++',variable=var2, onvalue=1, offvalue=0, command=print_selection)
+c2.pack(padx=20)
+ 
+window.mainloop()
