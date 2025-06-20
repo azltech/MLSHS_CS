@@ -1,5 +1,6 @@
-# Text entry tute 2
-#azltech june 2025
+# Tkinter tute 2
+# azltech june 2025
+# from tkinter.com
 
 from tkinter import *
 
