@@ -1,0 +1,39 @@
+# Text entry tute 2
+#azltech june 2025
+
+from tkinter import *
+
+root = Tk()
+root.title("Entry Widget")
+root.iconbitmap("")
+root.geometry("500x350")
+
+def insert():
+    # insert 'John'
+    my_entry.insert(END,"John")
+
+def answer():
+    my_hidden.config(text="")
+    if my_entry.get():
+        # output hidden label
+        my_hidden.config(text=f'Hello {my_entry.get()}')
+        my_entry.delete(0,END)
+    else:
+        my_hidden.config(text="Hey, you forgot your name")
+
+my_label = Label(root, text="Enter your name", font = ("Helvetica",24))
+my_label.pack(pady=20)
+
+my_entry = Entry(root,width=20,font=('Helevetica',18))
+my_entry.pack(pady=20)
+
+my_button = Button(root,text="Answer",command=answer)
+my_button.pack(pady=5)
+
+insert_button = Button(root,text="Insert",command=insert)
+insert_button.pack(pady=5)
+
+my_hidden = Label(root,text="",font=("Helvetica",22))
+my_hidden.pack(pady=20)
+
+root.mainloop()
