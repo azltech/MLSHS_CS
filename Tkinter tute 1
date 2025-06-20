@@ -1,3 +1,7 @@
+# Tkinter tute 1
+# azltech june 2025
+# from tkinter.com
+
 from tkinter import *
 
 root = Tk()
