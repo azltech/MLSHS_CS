@@ -1,0 +1,92 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# Pricing per participant
+pricing = {
+    "Adults": {
+        "Whale Watching": 45.0,
+        "Penguin Parade": 25.0,
+        "Fish Feeding": 30.0
+    },
+    "Students": {
+        "Whale Watching": 30.0,
+        "Penguin Parade": 20.0,
+        "Fish Feeding": 20.0
+    },
+    "Concession": {
+        "Whale Watching": 15.0,
+        "Penguin Parade": 10.0,
+        "Fish Feeding": 12.0
+    }
+}
+
+# Main window
+root = tk.Tk()
+root.title("Seaside Adventures Entry")
+root.geometry("420x450")
+
+# Variables
+activity = tk.StringVar(value="Whale Watching")
+adults_var = tk.StringVar(value="0")
+students_var = tk.StringVar(value="0")
+concession_var = tk.StringVar(value="0")
+
+# Title
+tk.Label(root, text="Seaside Adventures Entry", font=("Helvetica", 16, "bold")).pack(pady=10)
+
+# Participant Entry
+frame = tk.Frame(root)
+frame.pack(pady=10)
+
+tk.Label(frame, text="Number of Adults:").grid(row=0, column=0, sticky="e", padx=10, pady=5)
+tk.Entry(frame, textvariable=adults_var, width=5).grid(row=0, column=1)
+
+tk.Label(frame, text="Number of Students:").grid(row=1, column=0, sticky="e", padx=10, pady=5)
+tk.Entry(frame, textvariable=students_var, width=5).grid(row=1, column=1)
+
+tk.Label(frame, text="Number of Concession:").grid(row=2, column=0, sticky="e", padx=10, pady=5)
+tk.Entry(frame, textvariable=concession_var, width=5).grid(row=2, column=1)
+
+# Activity Selection
+tk.Label(root, text="Select Activity:", font=("Helvetica", 12)).pack(anchor="w", padx=20)
+for option in ["Whale Watching", "Penguin Parade", "Fish Feeding"]:
+    tk.Radiobutton(root, text=option, variable=activity, value=option).pack(anchor="w", padx=40)
+
+# Cost Display Label
+cost_label = tk.Label(root, text="Total Cost: $0.00", font=("Helvetica", 14), fg="green")
+cost_label.pack(pady=20)
+
+# Function to calculate cost
+def show_cost():
+    try:
+        a = int(adults_var.get())
+        s = int(students_var.get())
+        c = int(concession_var.get())
+        act = activity.get()
+
+        total = (
+            a * pricing["Adults"][act] +
+            s * pricing["Students"][act] +
+            c * pricing["Concession"][act]
+        )
+        cost_label.config(text=f"Total Cost: ${total:.2f}")
+    except ValueError:
+        messagebox.showerror("Input Error", "Please enter whole numbers only.")
+
+# Function to clear fields
+def clear_form():
+    adults_var.set("0")
+    students_var.set("0")
+    concession_var.set("0")
+    activity.set("Whale Watching")
+    cost_label.config(text="Total Cost: $0.00")
+
+# Buttons
+button_frame = tk.Frame(root)
+button_frame.pack(pady=10)
+
+tk.Button(button_frame, text="Show Cost", command=show_cost, bg="lightblue", font=("Helvetica", 12)).grid(row=0, column=0, padx=10)
+tk.Button(button_frame, text="Clear", command=clear_form, bg="lightgrey", font=("Helvetica", 12)).grid(row=0, column=1, padx=10)
+
+# Run the app
+root.mainloop()
